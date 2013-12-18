@@ -1,0 +1,53 @@
+<!doctype HTML>
+<html ng-app="pagerApp" ng-controller="MainController">
+  <head>
+    <meta charset="utf-8">
+    <title>{{page.title}} - angularjs page solution</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body>
+    <header>
+      <h1>{{page.title}}</h1>
+    </header>
+    <nav>
+      <a href="#/home">home</a>
+      <a href="#/links">links</a>
+      <a href="#/about">about</a>
+    </nav>
+    <div id="main" ng-view>
+
+    </div>  
+    <footer>
+      foot 
+    </footer>
+    <script type="text/ng-template" id="home">
+      <p>welcome to this page</p>
+    </script>
+    <script type="text/ng-template" id="links">
+      <h3>my link collection</h3>
+      <ul>
+        <li ng-repeat="link in links"><a href="#/links/{{link.id}}">{{link.name}}</a></li>
+      </ul>
+      <div ng-show="showSingle" class="link-single-view">
+          <h4>link: {{currentLink.name}}</h4>
+          <a href="{{currentLink.url}}" target="_blank">go to: {{currentLink.url}}</a>
+      </div>
+      <br>
+      add a new link: 
+      <form ng-submit="addLink()">
+        <input type="text" placeholder="link url" ng-model="newLink.url">
+        <input type="text" placeholder="link name" ng-model="newLink.name">
+        <input type="submit" value="add link">
+      </form>
+      <p>
+        if you switch to home or to about, the list wont remove your entered urls.
+      </p>
+    </script>
+    <script type="text/ng-template" id="about">
+      <p>theres nothing about me</p>
+    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min.js"></script>
+    <script src="scripts/app.js"></script>
+  </body>
+</html>
