@@ -64,33 +64,33 @@ angular.module('pagerApp', [
   .controller 'HomeController', ($scope, Page) ->
  		Page.setVal('title', 'Home')
  		return
- 	# serves all links
+	 # serves all links
 	.controller 'LinksController', ($scope, $routeParams, $location, Page) ->
-
-  	# access the cached element 
-  	# in case you don't want to change the Cache use angular.copy(Page.getCache('links'))
-  	$scope.links = Page.getCache('links')
-
-  	# pre set the title
-  	Page.setVal 'title', 'Links'
-
-  	# if the single view is requested by providing a linkID parameter
-  	if $routeParams.linkID
-  		# it looks a bit dirty but we don't work with a resource/database/api so [$routeParams.linkID - 1] is ok
-  		$location.path '#/links' unless $scope.links[$routeParams.linkID - 1]
-  		$scope.showSingle = true
-  		$scope.currentLink = $scope.links[$routeParams.linkID - 1]
-  		Page.setVal 'title', 'Link: ' + $scope.currentLink.name
-
-  	# is triggered by submit and adds a new link to the links list
-  	$scope.addLink = () ->
-  		if $scope.newLink.url.length < 4 || !$scope.newLink.name
-  			return console.error 'not enough data'
-  		# detect the new link's id
-  		$scope.newLink.id = $scope.links.length + 1
-  		$scope.links.push $scope.newLink
-  		# reset the newLink obj and view
-  		$scope.newLink = {}
+	
+	  # access the cached element 
+	  # in case you don't want to change the Cache use angular.copy(Page.getCache('links'))
+	  $scope.links = Page.getCache('links')
+	
+	  # pre set the title
+	  Page.setVal 'title', 'Links'
+	
+	  # if the single view is requested by providing a linkID parameter
+	  if $routeParams.linkID
+	  	# it looks a bit dirty but we don't work with a resource/database/api so [$routeParams.linkID - 1] is ok
+	  	$location.path '#/links' unless $scope.links[$routeParams.linkID - 1]
+	  	$scope.showSingle = true
+	  	$scope.currentLink = $scope.links[$routeParams.linkID - 1]
+	  	Page.setVal 'title', 'Link: ' + $scope.currentLink.name
+	
+	  # is triggered by submit and adds a new link to the links list
+	  $scope.addLink = () ->
+	  	if $scope.newLink.url.length < 4 || !$scope.newLink.name
+	  		return console.error 'not enough data'
+	  	# detect the new link's id
+	  	$scope.newLink.id = $scope.links.length + 1
+	  	$scope.links.push $scope.newLink
+	  	# reset the newLink obj and view
+	  	$scope.newLink = {}
 
   .controller 'AboutController', ($scope, Page) ->
   	Page.setVal 'title', 'About'
